@@ -84,15 +84,20 @@ jobs:
         with:
           node-version: ${{ matrix.entry.node_version }}
 
+      - name: Setup Yarn
+        run: |
+          npm uninstall -g yarn
+          npm i -g yarn@1.22.10
+
       - name: Install
         working-directory: js-client
         run: |
-          npm install
+          yarn install
 
       - name: Integration test
         working-directory: js-client
         run: |
-          npm run test:integration:helpers
+          yarn test:integration:helpers
 
       - name: Save server logs
         if: failure()

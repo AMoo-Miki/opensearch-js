@@ -35,21 +35,26 @@ jobs:
         with:
           node-version: 14.x
 
+      - name: Setup Yarn
+        run: |
+          npm uninstall -g yarn
+          npm i -g yarn@1.22.10
+
       - name: Install
         run: |
-          npm install
-          npm install --prefix test/bundlers/parcel-test
-          npm install --prefix test/bundlers/rollup-test
-          npm install --prefix test/bundlers/webpack-test
+          yarn install
+          yarn install --prefix test/bundlers/parcel-test
+          yarn install --prefix test/bundlers/rollup-test
+          yarn install --prefix test/bundlers/webpack-test
 
       - name: Build
         run: |
-          npm run build --prefix test/bundlers/parcel-test
-          npm run build --prefix test/bundlers/rollup-test
-          npm run build --prefix test/bundlers/webpack-test
+          yarn build --prefix test/bundlers/parcel-test
+          yarn build --prefix test/bundlers/rollup-test
+          yarn build --prefix test/bundlers/webpack-test
 
       - name: Run bundle
         run: |
-          npm start --prefix test/bundlers/parcel-test
-          npm start --prefix test/bundlers/rollup-test
-          npm start --prefix test/bundlers/webpack-test
+          yarn start --prefix test/bundlers/parcel-test
+          yarn start --prefix test/bundlers/rollup-test
+          yarn start --prefix test/bundlers/webpack-test

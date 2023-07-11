@@ -19,10 +19,15 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Setup Yarn
+        run: |
+          npm uninstall -g yarn
+          npm i -g yarn@1.22.10
+
       - name: Install
         run: |
-          npm install
+          yarn install
 
       - name: License checker
         run: |
-          npm run license-checker
+          yarn license-checker

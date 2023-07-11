@@ -54,19 +54,24 @@ jobs:
         with:
           node-version: 16.x
 
+      - name: Setup Yarn
+        run: |
+          npm uninstall -g yarn
+          npm i -g yarn@1.22.10
+
       - name: Install
         run: |
-          npm install
+          yarn install
 
       - name: Integration test without security
         if: ${{ matrix.secured == 'false'}}
         run: |
-          npm run test:integration:helpers
+          yarn test:integration:helpers
 
       - name: Integration test with security
         if: ${{ matrix.secured == 'true'}}
         run: |
-          npm run test:integration:helpers-secure
+          yarn test:integration:helpers-secure
 
       - name: Stop the OpenSearch cluster
         if: ${{ steps.start_opensearch_cluster.outcome == 'success'}}

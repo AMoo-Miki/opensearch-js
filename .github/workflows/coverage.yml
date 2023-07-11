@@ -27,12 +27,19 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Setup Yarn
+        run: |
+          npm uninstall -g yarn
+          npm i -g yarn@1.22.10
+
       - name: Install
         run: |
-          npm install
+          yarn install
+
       - name: Code coverage report
         run: |
-          npm run test:coverage-report
+          yarn test:coverage-report
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
@@ -41,4 +48,4 @@ jobs:
 
       - name: Code coverage 90%
         run: |
-          npm run test:coverage-90
+          yarn test:coverage-90
